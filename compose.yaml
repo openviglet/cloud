@@ -1,0 +1,57 @@
+services:
+  mariadb:
+    image: 'mariadb:latest'
+    environment:
+      - 'MARIADB_DATABASE=cloud'
+      - 'MARIADB_PASSWORD=secret'
+      - 'MARIADB_ROOT_PASSWORD=verysecret'
+      - 'MARIADB_USER=myuser'
+    ports:
+      - '3306:3306'
+    networks:
+      - viglet
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    ports:
+      - "4317:4317" # OTLP gRPC
+      - "4318:4318" # OTLP HTTP
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.3.1
+    command:
+      - start-dev
+      - --import-realm
+    container_name: keycloak
+    environment:
+      DB_VENDOR: MARIADB
+      DB_ADDR: mariadb
+      DB_DATABASE: cloud
+      DB_USER: root
+      DB_PASSWORD: verysecret
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin123
+    volumes:
+      - ./docker/keycloak/import:/opt/keycloak/data/import
+    ports:
+      - 8080:8080
+    depends_on:
+      - mariadb
+      - mailhog
+    networks:
+      - viglet
+    restart: always
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    environment:
+      MH_STORAGE: maildir
+      MH_API_BIND_ADDR: 0.0.0.0:8026
+      MH_UI_BIND_ADDR: 0.0.0.0:8026
+      MH_SMTP_BIND_ADDR: 0.0.0.0:8025
+    ports:
+      - 8025:8025
+      - 8026:8026
+    networks:
+      - viglet
+
+networks:
+  viglet:
