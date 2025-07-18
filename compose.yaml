@@ -31,8 +31,9 @@ services:
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin123
     volumes:
       - ./docker/keycloak/import:/opt/keycloak/data/import
+      - ./frontend/login/dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar:/opt/keycloak/providers/keycloak-theme.jar
     ports:
-      - 8080:8080
+      - "8080:8080"
     depends_on:
       - mariadb
       - mailhog
@@ -48,8 +49,8 @@ services:
       MH_UI_BIND_ADDR: 0.0.0.0:8026
       MH_SMTP_BIND_ADDR: 0.0.0.0:8025
     ports:
-      - 8025:8025
-      - 8026:8026
+      - "8025:8025"
+      - "8026:8026"
     networks:
       - viglet
 
