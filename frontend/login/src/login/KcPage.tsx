@@ -1,10 +1,11 @@
 import "./main.css";
-import { Suspense, lazy } from "react";
-import type { ClassKey } from "keycloakify/login";
-import type { KcContext } from "./KcContext";
-import { useI18n } from "./i18n";
+import {Suspense, lazy} from "react";
+import type {ClassKey} from "keycloakify/login";
+import type {KcContext} from "./KcContext";
+import {useI18n} from "./i18n";
 import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "keycloakify/login/Template";
+
 const UserProfileFormFields = lazy(
     () => import("keycloakify/login/UserProfileFormFields")
 );
@@ -12,9 +13,9 @@ const UserProfileFormFields = lazy(
 const doMakeUserConfirmPassword = true;
 
 export default function KcPage(props: { kcContext: KcContext }) {
-    const { kcContext } = props;
+    const {kcContext} = props;
 
-    const { i18n } = useI18n({ kcContext });
+    const {i18n} = useI18n({kcContext});
 
     return (
         <Suspense>
@@ -38,4 +39,9 @@ export default function KcPage(props: { kcContext: KcContext }) {
     );
 }
 
-const classes = {} satisfies { [key in ClassKey]?: string };
+const classes = {
+    kcButtonClass: "",
+    kcButtonPrimaryClass: "",
+    kcButtonBlockClass: "",
+    kcButtonLargeClass: "",
+    } satisfies { [key in ClassKey]?: string };

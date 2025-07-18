@@ -1,3 +1,78 @@
-.kcFormHeaderClass {
-    border: 3px solid red;
+body {
+    background-color: green; /* Example: Light gray background */
+}
+.kcButtonClass {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: orangered;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    width: 100%;
+}
+
+.kcButtonClass:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.kcButtonClass:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.kcButtonClass:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.5);
+}
+
+.kcButtonClass:disabled {
+    background: linear-gradient(45deg, #aaa, #ccc);
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.6;
+}
+
+.kcButtonClass:disabled:hover,
+.kcButtonClass:disabled:active {
+    transform: none;
+    box-shadow: none;
+}
+
+.kcHeaderWrapperClass::before {
+    content: "";
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url("../viglet/login/img/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-bottom: -5px;
+    margin-right: 15px;
+}
+
+.card-pf {
+    margin: 0 auto;
+    box-shadow: var(--pf-global--BoxShadow--lg);
+    padding: 0 20px;
+    max-width: 500px;
+    border-top: 4px solid;
+    border-color: orangered;
+}
+
+.login-pf body {
+    background: url("/viglet/login/img/viglet-bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    position: relative; /* Needed for backdrop-filter to work */
+    backdrop-filter: blur(10px) brightness(0.9);
+    padding: 10px;
+    border-radius: 5px;
 }
